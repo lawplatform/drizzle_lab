@@ -1,0 +1,13 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1700481234199,
+      "tag": "0000_exotic_nebula",
+      "breakpoints": true
+    }
+  ]
+}
