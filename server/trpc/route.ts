@@ -16,6 +16,10 @@ export const appRouter = router({
 		return result
 
 	}),
+	getOwnFiles: privateProcedure.query(({ ctx }) => {
+		return result
+
+	}),
 
 });
 
