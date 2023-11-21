@@ -1,4 +1,4 @@
-import { Noto_Sans as FontNoto, Nanum_Pen_Script as FontPen, Nanum_Gothic as FontNanum } from 'next/font/google'
+import { Noto_Sans as FontNoto, Nanum_Brush_Script as FontPen, Nanum_Gothic as FontNanum } from 'next/font/google'
 
 export const fontPen = FontPen({
 	subsets: ['latin'],

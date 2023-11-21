@@ -4,6 +4,7 @@ declare module "next-auth" {
 	interface Session {
 		supabaseAccessToken?: string
 		user: {
+			id: string
 		} & DefaultSession["user"]
 	}
 }

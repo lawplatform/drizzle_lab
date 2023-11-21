@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "test": "vitest",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -40,11 +41,13 @@
     "react": "^18",
     "react-babylonjs": "^3.1.26",
     "react-dom": "^18",
+    "react-dropzone": "^14.2.3",
     "react-hook-form": "^7.48.2",
     "supabase": "^1.112.0",
     "tailwind-merge": "^2.0.0",
     "tailwind-scrollbar-hide": "^1.1.7",
     "tailwindcss-animate": "^1.0.7",
+    "vitest": "^0.34.6",
     "zod": "^3.22.4"
   },
   "devDependencies": {
