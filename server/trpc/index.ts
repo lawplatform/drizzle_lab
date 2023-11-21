@@ -1,5 +1,3 @@
-import { db } from '../db';
-import { user } from '../db/migrations/schema';
 import { publicProcedure, router } from './trpc';
 import { z } from 'zod'
 export const appRouter = router({
@@ -8,7 +6,7 @@ export const appRouter = router({
 		return [1, 2, 3, 4, 5];
 	}),
 	addTodo: publicProcedure.input(z.string()).mutation(async (opts) => {
-		await db.insert(user).values({ email: opts.input });
+		//await db.insert(user).values({ email: opts.input });
 	})
 });
 

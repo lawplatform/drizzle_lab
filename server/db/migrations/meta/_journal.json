@@ -8,6 +8,20 @@
       "when": 1700481234199,
       "tag": "0000_exotic_nebula",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1700541098566,
+      "tag": "0001_fast_doctor_doom",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1700542333856,
+      "tag": "0002_tense_crystal",
+      "breakpoints": true
     }
   ]
 }

@@ -8,13 +8,14 @@
     "start": "next start",
     "lint": "next lint",
     "push": "drizzle-kit push:pg",
-    "pull": "drizzle-kit introspect:pg ",
+    "pull": "drizzle-kit introspect:pg",
     "gen": "drizzle-kit generate:pg",
     "drop": "drizzle-kit drop",
     "check": "drizzle-kit check:pg",
     "up": "drizzle-kit up:pg"
   },
   "dependencies": {
+    "@auth/drizzle-adapter": "^0.3.7",
     "@babylonjs/core": "^6.30.0",
     "@babylonjs/gui": "^6.30.0",
     "@hookform/resolvers": "^3.3.2",
@@ -30,6 +31,7 @@
     "lucide-react": "^0.292.0",
     "next": "14.0.1",
     "next-auth": "^4.24.5",
+    "pg": "^8.11.3",
     "postgres": "^3.4.3",
     "react": "^18",
     "react-babylonjs": "^3.1.26",

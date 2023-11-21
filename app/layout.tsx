@@ -4,6 +4,7 @@ import './globals.css'
 import { fontNoto, fontPen, fontNanum } from '@/lib/fonts'
 import TrpcProvider from '@/server/trpc/trpcProvider'
 import { cn } from '@/lib/utils'
+import NextAuthProvider from '@/server/auth/authprovider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -13,10 +14,6 @@ export const metadata: Metadata = {
 		template: `%s - addfix`
 	},
 	description: 'whiat is this site?',
-	themeColor: [
-		{ media: '(prefers-color-scheme: light)', color: 'white' },
-		{ media: '(prefers-color-scheme: dark)', color: 'black' }
-	],
 	icons: {
 		icon: '/favicon.ico',
 		shortcut: '/favicon-16x16.png',
@@ -32,7 +29,11 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={cn('antialiased', fontNoto.variable, fontPen.variable, fontNanum.variable)}>
-				<TrpcProvider>{children}</TrpcProvider>
+				<NextAuthProvider>
+					<TrpcProvider>
+						{children}
+					</TrpcProvider>
+				</NextAuthProvider>
 			</body>
 		</html>
 	)

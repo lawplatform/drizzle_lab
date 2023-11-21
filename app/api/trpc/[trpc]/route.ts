@@ -5,7 +5,7 @@ const handler = (req: Request) =>
 	fetchRequestHandler({
 		endpoint: "/api/trpc",
 		req,
-		router: AppRouter,
+		router: appRouter,
 		createContext: () => ({})
 	});
 
