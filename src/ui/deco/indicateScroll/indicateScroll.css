@@ -1,0 +1,14 @@
+#progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 5px;
+      background-color: black;
+      z-index: 1000;
+      transition: width 0.3s ease;
+    }
+
+    #content {
+      margin-top: 10px; /* Adjust according to your layout */
+    }

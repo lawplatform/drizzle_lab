@@ -1,0 +1,123 @@
+@import url("https://webfontworld.github.io/amore/AritaBuri.css");
+
+@import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+
+
+@font-face {
+  font-family: "GangwonEduHyeonokT_OTFMediumA";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEduHyeonokT_OTFMediumA.woff")
+    format("woff");
+}
+
+@font-face {
+  font-family: 'Noto'; /* Give your font a name */
+  src: url('/font/NotoSans-Regular.woff') format('woff'), /* Replace with the path to your font file */
+       url('/font/NotoSans-Regular.woff2') format('woff2'); /* Provide additional formats if needed */
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+	font-family: 'NanumGothic';
+	font-style: normal;
+	font-weight: 100;
+	src: url(/font/NanumGothicLight.woff2) format('woff2'),
+	url(/font/NanumGothicLight.woff) format('woff'),
+	url(/font/NanumGothicLight.otf) format('opentype');
+}
+
+@font-face {
+	font-family: 'NanumGothic';
+	font-style: normal;
+	font-weight: 300;
+	src: url(/font/NanumGothic.woff2) format('woff2'),
+	url(/font/NanumGothic.woff) format('woff'),
+	url(/font/NanumGothic.otf) format('opentype');
+}
+
+
+@font-face {
+	font-family: 'NanumGothic';
+	font-style: normal;
+	font-weight: 600;
+	src: url(/font/NanumGothicBold.woff2) format('woff2'),
+	url(/font/NanumGothicBold.woff) format('woff'),
+	url(/font/NanumGothicBold.otf) format('opentype');
+}
+
+
+@font-face {
+	font-family: 'NanumGothic';
+	font-style: normal;
+	font-weight: 700;
+	src: url(/font/NanumGothicExtraBold.woff2) format('woff2'),
+	url(/font/NanumGothicExtraBold.woff) format('woff'),
+	url(/font/NanumGothicExtraBold.otf) format('opentype');
+}
+
+.nanumpenscript{
+ font-family: 'Nanum Pen Script', cursive;
+}
+.notofont {
+    width: 33.3%;
+    float:left;
+    font-family: "noto";
+}
+
+.nanumfont {
+    width: 33.3%;
+    float:left;
+    font-family: "Nanum";
+}
+
+
+
+
+.ql-font-Nanum {
+  font-family: 'Nanum', sans-serif;
+}
+
+
+.ql-font-noto {
+  font-family: 'Noto', sans-serif;
+}
+
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value=Noto]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value=Noto]::before {
+    content: 'Noto';
+    font-family: 'Noto', sans-serif;
+}
+
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value=Nanum]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value=Nanum]::before {
+    content: 'Nanum';
+    font-family: 'Nanum', sans-serif;
+}
+
+
+
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value=Pen]::before,
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value=Pen]::before {
+    content: 'Pen';
+    font-family: 'Pen', sans-serif;
+}
+
+.ql-font-Pen {
+	font-family: 'Nanum Pen Script', cursive;
+}
+
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value="10px"]::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="10px"]::before {
+    content: '12';
+    font-size: 14px !important;
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="16px"]::before {
+    content: '16';
+    font-size: 16px !important;
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="18px"]::before {
+    content: '18';
+    font-size: 18px !important;
+}

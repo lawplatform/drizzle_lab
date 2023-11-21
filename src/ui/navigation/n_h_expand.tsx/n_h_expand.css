@@ -1,0 +1,18 @@
+.nhe_nav{
+	position:fixed;
+	left:0;
+	top:0;
+	width:100%;
+	z-index:40;
+}
+
+.nhe_wrap{
+	display:flex;
+	justify-content:space-between;
+	padding: 2rem 9.6rem;
+}
+
+.nhe_wrap span{
+	font-size:2rem;
+	cursor:pointer;
+}

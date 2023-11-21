@@ -1,0 +1,109 @@
+.c_up_card {
+	width: 300px;
+	height: 300px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 0 36px;
+	perspective: 2500px;
+	cursor: pointer;
+	border-radius: 20px;
+}
+
+.c_up_cover {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.c_up_wrapper {
+	height: 100%;
+	transition: all 0.5s;
+	position: relative;
+	width: 100%;
+	z-index: -1;
+	background: #000;
+	border-radius: 30px;
+	box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+
+}
+
+.c_up_wrapper img{
+	
+	object-fit:cover;
+}
+
+.c_up_wrapper img {
+	border-radius: 30px;
+	box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}
+
+.c_up_card:hover .c_up_wrapper {
+	transform: perspective(900px) translateY(-5%) rotateX(25deg) translateZ(0);
+	box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
+	-webkit-box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
+}
+
+.c_up_wrapper::before,
+.c_up_wrapper::after {
+	content: "";
+	opacity: 0;
+	width: 100%;
+	height: 80px;
+	transition: all 0.5s;
+	border-radius: 30px;
+	position: relative;
+	left: 0;
+	box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}
+.c_up_wrapper::before {
+	top: 0;
+	height: 100%;
+	background-image: linear-gradient(to top,transparent 46%,rgba(12, 13, 19, 0.5) 68%,rgba(12, 13, 19) 97%);
+}
+
+.c_up_wrapper::after {
+	bottom: 0;
+	opacity: 1;
+	background-image: linear-gradient(to bottom,transparent 46%,rgba(12, 13, 19, 0.5) 68%,rgba(12, 13, 19) 97%);
+}
+
+.c_up_card:hover .c_up_wrapper::before,
+.c_up_wrapper::after {
+	opacity: 1;
+}
+
+.c_up_card:hover .c_up_wrapper::after {
+	height: 120px;
+}
+
+.c_up_logo {
+	width: 100%;
+	transition: transform 0.5s;
+	position: absolute;
+    bottom: 10px;
+}
+
+.c_up_card:hover .c_up_logo {
+	transform: translate3d(0%, -50px, 100px);
+}
+
+.c_up_card:hover .c_up_cover {
+    opacity: 0.3;
+}
+
+.c_up_character {
+	width: 100%;
+	opacity: 0;
+	transition: all 0.5s;
+	filter: drop-shadow(2px 2px 2px #000);
+	position: absolute;
+	z-index: -1;
+	transform-origin:bottom;
+}
+
+.c_up_card:hover .c_up_character {
+	opacity: 1;
+	transform: translate3d(5%, -20%, 670px);
+}

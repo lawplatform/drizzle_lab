@@ -1,0 +1,33 @@
+.mask-container {
+  position: relative;
+  height:100vh;
+}
+
+.color-image {
+  background-image: url("/effect/object/monitor-gray.png");
+  -webkit-mask-image: url("/effect/ink/ink_1.png");
+    -webkit-mask-size: auto 100%;
+  -webkit-mask-position: 0% 0%;
+  mask-image: url("/effect/ink/ink_1.png");
+  mask-size: auto 100vh;
+  mask-position: 0% 0%;
+
+  transition: -webkit-mask-position ;
+	transition: mask-position;
+}
+
+.mask-animation {
+  animation: 
+    addColor 600ms steps(24) forwards;
+}
+
+@keyframes addColor {
+  0% {
+    -webkit-mask-position: 0% 0%;
+    mask-position: 0% 0%;
+  }
+  100% {
+    -webkit-mask-position: 100% 0%;
+    mask-position: 100% 0%;
+  }
+}

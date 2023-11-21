@@ -1,0 +1,25 @@
+.ccb_card{
+	color: hsl(0,0%,100%);
+	background-image:url("/temp/A.png");
+	background-size:cover;
+	padding: 10rem 0 0;
+	max-width:35ch;
+	min-height:200px;
+	object-fit:cover;
+}
+.ccb_content{
+ padding:1.5em;
+ background: linear-gradient(
+	 hsl(0 0% 0% /100),
+	 hsl(20 0% 0% /0.3) 20%,
+	 hsl(0 0% 0% /1)
+	 );
+ 
+}
+
+.ccb_title{
+	content:"";
+	position:absolute;
+	height:3px;
+	background: hsl(142,90%, 61%);
+}
