@@ -1,16 +1,91 @@
 {
-  "id": "e8c2a11c-0800-4601-979f-e3d6fcdf7f4f",
-  "prevId": "466788c9-141f-4643-bad9-ba607cacc8ab",
+  "id": "c291ab00-32b9-432e-8853-fe61921ace9e",
+  "prevId": "df1a7102-8145-4438-ad96-6b0960e2af06",
   "version": "5",
   "dialect": "pg",
   "tables": {
+    "file": {
+      "name": "file",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "status": {
+          "name": "status",
+          "type": "status",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'PENDING'"
+        },
+        "url": {
+          "name": "url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "key": {
+          "name": "key",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "file_user_id_user_id_fk": {
+          "name": "file_user_id_user_id_fk",
+          "tableFrom": "file",
+          "tableTo": "user",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
     "account": {
       "name": "account",
       "schema": "",
       "columns": {
-        "use_id": {
-          "name": "use_id",
-          "type": "text",
+        "userId": {
+          "name": "userId",
+          "type": "uuid",
           "primaryKey": false,
           "notNull": true
         },
@@ -77,12 +152,12 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "account_use_id_user_id_fk": {
-          "name": "account_use_id_user_id_fk",
+        "account_userId_user_id_fk": {
+          "name": "account_userId_user_id_fk",
           "tableFrom": "account",
           "tableTo": "user",
           "columnsFrom": [
-            "use_id"
+            "userId"
           ],
           "columnsTo": [
             "id"
@@ -112,9 +187,9 @@
           "primaryKey": true,
           "notNull": true
         },
-        "user_id": {
-          "name": "user_id",
-          "type": "text",
+        "useId": {
+          "name": "useId",
+          "type": "uuid",
           "primaryKey": false,
           "notNull": true
         },
@@ -127,12 +202,12 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "session_user_id_user_id_fk": {
-          "name": "session_user_id_user_id_fk",
+        "session_useId_user_id_fk": {
+          "name": "session_useId_user_id_fk",
           "tableFrom": "session",
           "tableTo": "user",
           "columnsFrom": [
-            "user_id"
+            "useId"
           ],
           "columnsTo": [
             "id"
@@ -148,11 +223,11 @@
       "name": "stripe",
       "schema": "",
       "columns": {
-        "user_id": {
-          "name": "user_id",
+        "userId": {
+          "name": "userId",
           "type": "uuid",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "stripe_customer_id": {
           "name": "stripe_customer_id",
@@ -181,17 +256,17 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "stripe_user_id_user_id_fk": {
-          "name": "stripe_user_id_user_id_fk",
+        "stripe_userId_user_id_fk": {
+          "name": "stripe_userId_user_id_fk",
           "tableFrom": "stripe",
           "tableTo": "user",
           "columnsFrom": [
-            "user_id"
+            "userId"
           ],
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
@@ -205,7 +280,7 @@
         "id": {
           "name": "id",
           "type": "uuid",
-          "primaryKey": false,
+          "primaryKey": true,
           "notNull": true,
           "default": "gen_random_uuid()"
         },
@@ -284,11 +359,25 @@
       "uniqueConstraints": {}
     }
   },
-  "enums": {},
+  "enums": {
+    "status": {
+      "name": "status",
+      "values": {
+        "PENDING": "PENDING",
+        "PROCESSING": "PROCESSING",
+        "FAILDE": "FAILDE",
+        "SUCCESS": "SUCCESS"
+      }
+    }
+  },
   "schemas": {},
   "_meta": {
     "schemas": {},
     "tables": {},
-    "columns": {}
+    "columns": {
+      "\"account\".\"user_id\"": "\"account\".\"userId\"",
+      "\"session\".\"user_id\"": "\"session\".\"useId\"",
+      "\"stripe\".\"user_id\"": "\"stripe\".\"userId\""
+    }
   }
 }

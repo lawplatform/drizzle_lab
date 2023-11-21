@@ -24,7 +24,7 @@ export const usersRelations = relations(user, ({ one }) => ({
 
 
 export const stripe = pgTable("stripe", {
-	userid: uuid("user_id").notNull().references(() => user.id, { onDelete: "cascade" }),
+	userid: uuid("userId").notNull().references(() => user.id, { onDelete: "cascade" }),
 
 	stripeCustomerId: text("stripe_customer_id"),
 	stripeSubscriptionId: text("stripe_subscription_id"),
@@ -34,7 +34,7 @@ export const stripe = pgTable("stripe", {
 
 
 export const accounts = pgTable("account", {
-	userid: uuid("user_id").notNull().references(() => user.id, { onDelete: "cascade" }),
+	userId: uuid("userId").notNull().references(() => user.id, { onDelete: "cascade" }),
 	type: text("type").$type<AdapterAccount["type"]>().notNull(),
 	provider: text("provider").notNull(),
 	providerAccountId: text("providerAccountId").notNull(),
@@ -53,7 +53,7 @@ export const accounts = pgTable("account", {
 
 export const sessions = pgTable("session", {
 	sessionToken: text("sessionToken").notNull().primaryKey(),
-	userid: uuid("user_id").notNull().references(() => user.id, { onDelete: "cascade" }),
+	userId: uuid("useId").notNull().references(() => user.id, { onDelete: "cascade" }),
 	expires: timestamp("expires", { mode: "date" }).notNull(),
 })
 
