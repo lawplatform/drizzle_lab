@@ -11,14 +11,14 @@ import Link from "next/link";
 import { Suspense, } from "react";
 
 export default async function Dash_chatbot() {
-	const files = await trpc.getFiles.useQuery();
+	const { data: files } = trpc.getOwnFiles.useQuery()
 	return (
 		<main className="mx-auto max-w-6xl md:p-10">
 			<div className="mt-8 flex flex-col items-start justify-between gap-4 border-b  border-gray-200 pb-5 sm:flex-row sm:items-center sm:gap-0">
 				<h1 className="mb-3 text-5xl font-bold text-gray-900">My</h1>
 				<B_upload_file />
 			</div>
-			{files.data.length}
+			{files && files.length}
 			<C_info_circleIcon />
 			<div className="mt-8 flex flex-col items-start justify-between gap-4 border-b  border-gray-200 pb-5 sm:flex-row sm:items-center sm:gap-0" />
 			<Suspense fallback={<Skeleton className="my-2 h-[100px] rounded-sm" />}>

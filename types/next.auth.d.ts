@@ -4,7 +4,13 @@ declare module "next-auth" {
 	interface Session {
 		supabaseAccessToken?: string
 		user: {
-			id: string
+			id: UserId;
 		} & DefaultSession["user"]
+	}
+}
+
+declare module "next-auth/jwt" {
+	interface JWT {
+		id: UserId;
 	}
 }

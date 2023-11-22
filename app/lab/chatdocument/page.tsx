@@ -1,15 +1,18 @@
 import { Button } from "@/components/ui/button";
+import { authOptions } from "@/server/auth/authOption";
 import Chat_document from "@/src/component/chatDocument";
 import Sec_feature_step from "@/src/page/section/sec_feature";
-import Sec_feature from "@/src/page/section/sec_feature";
-import Bg_gra_abstract from "@/src/ui/background/bg_gra_abstract";
 import IndicateScroll from "@/src/ui/deco/indicateScroll";
-import N_navbar from "@/src/ui/navigation/n_navbar";
 import Text_info_1 from "@/src/ui/text/text_info_1";
+import { getServerSession } from "next-auth/next";
 import Image from "next/image";
 export default function ChatDocument() {
+	const session = getServerSession(authOptions);
+	const current = JSON.stringify(session);
+
 	return (
 		<div>
+			{}
 			<div className="absolute top-10">
 				<IndicateScroll />
 			</div>
