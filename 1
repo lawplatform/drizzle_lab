@@ -1,28 +1,37 @@
-import { TRPCError, initTRPC } from "@trpc/server"
-import { getServerSession } from "next-auth/next";
-import { useSession } from "next-auth/react";
-import { authOptions } from "../auth/authOption";
+import { db } from '../db';
+import { file } from '../db/schema/file';
+import { privateProcedure, publicProcedure, router } from './index';
+import { z } from 'zod'
+import { eq, lt, gte, ne } from 'drizzle-orm';
+export const appRouter = router({
+	getTodos: publicProcedure.query(async () => {
+		const result = db.select().from(file);
+		return result;
+		//return [1, 2, 3, 4, 5, 10];
+	}),
+	addTodo: publicProcedure.input(z.string()).mutation(async (opts) => {
+		//await db.insert(user).values({ email: opts.input });
+	}),
+	getFiles: publicProcedure.input(z.string()).query(async (opts) => {
+		if (!opts) return
+		//const result = db.select().from(file).where(eq(file.userid, opts.input));
+		const result = db.select().from(file);
+		return result
 
-const t = initTRPC.create();
-const middleware = t.middleware
+	}),
+	deleteFile: privateProcedure.input(z.string(id: z.string()))
+		.mutation(async (ctx) => {
 
-const isAuth = middleware(async (opts) => {
-	const session = await getServerSession(authOptions);
-	const id = JSON.parse(JSON.stringify(session, null, 2));
 
-	if (!id.user.id) {
-		throw new TRPCError({ code: "UNAUTHORIZED" });
+		})
+	getOwnFiles: privateProcedure.query(({ ctx }) => {
+			const { userId } = ctx
+			const result = db.select().from(file).where(eq(file.userid, userId));
+			return result;
+		}),
 
-	}
-	return opts.next({
-		ctx: {
-			userId: id.user.id
-		}
-	}
-	)
+});
 
-})
-
-export const router = t.router
-export const publicProcedure = t.procedure;
-export const privateProcedure = t.procedure.use(isAuth)
+// Export type router type signature,
+// NOT the router itself.
+export type AppRouter = typeof appRouter;

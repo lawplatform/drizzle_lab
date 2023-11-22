@@ -1,0 +1,11 @@
+interface PageProps {
+	params: {
+		fieldId: string
+	}
+}
+export default function Home({ params }: PageProps) {
+	const { filedId } = params;
+	return (
+		<div>{filedId}</div>
+	)
+}

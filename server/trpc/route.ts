@@ -1,8 +1,8 @@
 import { db } from '../db';
 import { file } from '../db/schema/file';
-import { privateProcedure, publicProcedure, router } from './trpc';
+import { privateProcedure, publicProcedure, router } from './index';
 import { z } from 'zod'
-import { eq, lt, gte, ne } from 'drizzle-orm';
+import { eq, and, gte, ne } from 'drizzle-orm';
 export const appRouter = router({
 	getTodos: publicProcedure.query(async () => {
 		const result = db.select().from(file);
@@ -19,10 +19,26 @@ export const appRouter = router({
 		return result
 
 	}),
+
+
+	getFile: privateProcedure.input(z.object({ id: z.string() })).query(async ({ ctx, input }) => {
+		const { userId } = ctx
+		const result = await db.select().from(file).where(and(eq(file.id, input.id), eq(file.userid, ctx.userId)))
+		//const result = db.select().from(file);
+
+		return result;
+
+	}),
+
+
+	deleteFile: privateProcedure.input(z.object({ id: z.string() })).mutation(async ({ ctx, input }) => {
+		await db.delete(file).where(eq(file.id, input.id)).returning();
+
+		return true;
+
+	}),
 	getOwnFiles: privateProcedure.query(({ ctx }) => {
 		const { userId } = ctx
-
-
 		const result = db.select().from(file).where(eq(file.userid, userId));
 		return result;
 	}),
