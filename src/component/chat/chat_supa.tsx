@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-"use client"
-import { useEffect } from "react"
-
-=======
 import supabase from "@/server/supabase";
 import { useEffect, useRef, useState } from "react";
 const message = [
@@ -22,25 +17,24 @@ type Msg = {
 }
 async function Messages() {
 	const [messages, setMessages] = useState<Msg[]>([])
-	const messageRef = useRef<HTMLDivElement>();
-	const { data, error } = await supabase.from<Msg>('messages').select('* , profile:profiles(username)')
-	if (!data) {
-		return
-	} else {
-		setMessages(data)
+	const messageRef = useRef<HTMLDivElement>(null);
+	const getData = async () => {
+		const { data, error } = await supabase.from<Msg>('messages').select('* , profile:profiles(username)')
+		if (!data) {
+			return
+		} else {
+			setMessages(data)
+			if (messageRef.current) {//when new message it scroll top
+				messageRef.current.scrollTop = messageRef.current.scrollHeight
+			}
+
+		}
+
 	}
-
-}
-
-
-
-export default function name() {
-
-
-
 	useEffect(() => {
-
+		getData()
 	}, [])
+
 
 	useEffect(() => {
 		const subscription = supabase.from<Message>('messages').on('INSERT', () => {
@@ -65,37 +59,20 @@ export default function name() {
 			}
 		}
 	}
->>>>>>> e8fc909 (feat : add ai moudle and scroll setion)
 
-
-export default function Sc_scroll() {
-	useEffect(() => {
-
-
-
-
-	}, [])
 	return (
-<<<<<<< HEAD
-
-		<div id="sc_content">
-			<section>a</section>
-			<section>b</section>
-			<section>c</section>
-			<section>d</section>
-			<section>e</section>
-=======
 		<div>
-			{message.map((message) => (
+			<div ref={messageRef}>
+				{message.map((message) => (
 
-				<li key={message.id}
-					className={message.profile_id === userID
-						? 'rouded self-end bg-blue-400 px-2'
-						: 'selp-start rounded bg-gray-400'}>
+					<li key={message.id}
+						className={message.profile_id === userID
+							? 'rouded self-end bg-blue-400 px-2'
+							: 'selp-start rounded bg-gray-400'}>
 
-				</li>
-			))}
->>>>>>> e8fc909 (feat : add ai moudle and scroll setion)
+					</li>
+				))}
+			</div>
 		</div>
 	)
 }
