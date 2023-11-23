@@ -1,0 +1,35 @@
+.canvas-container{
+	position:fixed;
+	top:50%
+	left:50%;
+	transform: translate(-50%, -50%);
+	z-index:1;
+	transition: ease-in-out 0.1s
+}
+
+.text-container{
+	display:flex;
+	position:fixed;
+	top:10%;
+    height:80%;
+	width:100%;
+	position:fixed:
+	left:0;
+	z-index:2;
+	transition:ease-in-out 0.5s;
+
+}
+
+.scroll-area{
+	position:relative;
+	z-index:3;
+}
+
+.more-content{
+	position:relative;
+	height:100vh;
+	z-index:3;
+}
+
+
+

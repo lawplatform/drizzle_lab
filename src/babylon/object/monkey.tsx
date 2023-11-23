@@ -10,13 +10,15 @@ interface ByMonkeyProps {
 	// Define other props as needed
 	ref?: React.RefObject<HTMLDivElement>;
 }
-const By_monkey: FC<ByMonkeyProps> = forwardRef((props, ref: ForwardedRef<HTMLDivElement>) => {
+const By_monkey = forwardRef((props) => {
 
 	const modelRef = useRef<Nullable<AbstractMesh>>(null);
 	let baseUrl = '/glb/';
 	const scene = useScene()
 
-
+	const move = () => {
+		modelRef.current!.position.x = 40
+	}
 
 	const onModelLoaded = (model: ILoadedModel) => {
 		modelRef.current = model.rootMesh!
