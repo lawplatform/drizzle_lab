@@ -38,6 +38,9 @@ dependencies:
   '@react-pdf/renderer':
     specifier: ^3.1.14
     version: 3.1.14(react@18.2.0)
+  '@studio-freight/lenis':
+    specifier: ^1.0.28
+    version: 1.0.28
   '@supabase/supabase-js':
     specifier: ^2.38.5
     version: 2.38.5
@@ -74,6 +77,9 @@ dependencies:
   glTF:
     specifier: link:@babylonjs/loaders/glTF
     version: link:@babylonjs/loaders/glTF
+  lenis:
+    specifier: ^0.0.2
+    version: 0.0.2
   lucide-react:
     specifier: ^0.292.0
     version: 0.292.0(react@18.2.0)
@@ -1676,6 +1682,10 @@ packages:
 
   /@sinclair/typebox@0.27.8:
     resolution: {integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==}
+    dev: false
+
+  /@studio-freight/lenis@1.0.28:
+    resolution: {integrity: sha512-+t2rKphnNCpaCuoSZjR3/c21wuuALlgb9ldwwKaGDsk9f6le7KXNYJisp5uJJC9Gz6FG37y+IH20OMNGGJqBXA==}
     dev: false
 
   /@supabase/functions-js@2.1.5:
@@ -4033,6 +4043,10 @@ packages:
     dependencies:
       language-subtag-registry: 0.3.22
     dev: true
+
+  /lenis@0.0.2:
+    resolution: {integrity: sha512-lQBkSrQt0VATcXvG5L5yU9Bn3un4fijTfb7g+d3GkkuAzB4b3LtKVUeN0heOgPkl/SzQ/FQDXj+w8eXjfdxSiQ==}
+    dev: false
 
   /levn@0.4.1:
     resolution: {integrity: sha512-+bT2uH4E5LGE7h/n3evcS/sQlJXCpIp6ym8OWJ5eV6+67Dsql/LaaT7qJBAt2rzfoa/5QBGBhxDix1dMt2kQKQ==}

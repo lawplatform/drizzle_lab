@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-<<<<<<< HEAD
   section {
     margin: auto;
     justify-content: center;
