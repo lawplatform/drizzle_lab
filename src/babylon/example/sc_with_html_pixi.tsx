@@ -1,8 +1,9 @@
-import { Color4, Vector3 } from '@babylonjs/core'
+import { Color3, Color4, Vector3 } from '@babylonjs/core'
 import { FC, ReactNode } from 'react';
-import { Engine, Scene, Camera } from 'react-babylonjs'
+import { Engine, Scene, Camera, Html } from 'react-babylonjs'
+import Sc_scroll from './scroll/sc_scroll';
 //basic scene not include camera
-const Sc_basic: React.FC<{ children: ReactNode }> = ({ children }: { children: ReactNode }) => (
+const Sc_with_html_pixi: React.FC<{ children: ReactNode }> = ({ children }: { children: ReactNode }) => (
 	<div style={{ flex: 1, display: 'flex bg-transparent' }}>
 		<Engine antialias adaptToDeviceRatio canvasId="babylon-canvas" renderOptions={{
 			whenVisibleOnly: true,
@@ -28,6 +29,32 @@ const Sc_basic: React.FC<{ children: ReactNode }> = ({ children }: { children: R
 					upperAlphaLimit={Math.PI / 4 + 0.1}  // Adjust the upper limit for XZ rotatio
 				/>
 
+				<box name="kim" position={new Vector3(0, 0, 0)}>
+					<standardMaterial
+						name="mat"
+						specularColor={Color3.Black()}
+					/>
+
+				</box>
+
+				<Html name="html" center occlude={false}>
+					{
+						<div
+							style={{
+								backgroundColor: 'white',
+								borderRadius: '5px',
+								border: '3px solid red',
+								padding: '8px',
+								position: "absolute",
+								left: `${"30px"}`
+							}}
+						>
+							<Sc_scroll />
+						</div>
+					}
+				</Html>
+
+
 
 				{children}
 			</Scene>
@@ -36,4 +63,4 @@ const Sc_basic: React.FC<{ children: ReactNode }> = ({ children }: { children: R
 )
 
 
-export default Sc_basic;
+export default Sc_with_html_pixi;
