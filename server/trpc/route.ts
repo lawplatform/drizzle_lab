@@ -20,17 +20,6 @@ export const appRouter = router({
 
 	}),
 
-
-	getFile: privateProcedure.input(z.object({ id: z.string() })).query(async ({ ctx, input }) => {
-		const { userId } = ctx
-		const result = await db.select().from(file).where(and(eq(file.id, input.id), eq(file.userid, ctx.userId)))
-		//const result = db.select().from(file);
-
-		return result;
-
-	}),
-
-
 	deleteFile: privateProcedure.input(z.object({ id: z.string() })).mutation(async ({ ctx, input }) => {
 		await db.delete(file).where(eq(file.id, input.id)).returning();
 
@@ -41,6 +30,15 @@ export const appRouter = router({
 		const { userId } = ctx
 		const result = db.select().from(file).where(eq(file.userid, userId));
 		return result;
+	}),
+
+	getOwnFilebyId: privateProcedure.input(z.object({ id: z.string() })).query(async ({ ctx, input }) => {
+		const { userId } = ctx
+		const result = await db.select().from(file).where(and(eq(file.id, input.id), eq(file.userid, ctx.userId)))
+		//const result = db.select().from(file);
+
+		return result;
+
 	}),
 
 });

@@ -30,17 +30,16 @@ export default function Page({ params }: { params: { fileId: string } }) {
 	try {
 	
 		const uuid = uuidSchema.parse(params.fileId);
-		const { data: files } = trpc.getFile.useQuery({ id: params.fileId });
-	
+		const { data: files } = trpc.getOwnFilebyId.useQuery({ id: params.fileId });
 		if (files?.length == 0) {
 			//file not found
-			router.push("/lab/chatdocument/dash");
+			router.push("/lab/chatdocument/dash"); //or notfound();
 		}
-	
+	    
 		return (
 			<div>
 				{files && files.map((file) => <h1>{file.name}</h1>)}
-				<h1>get! their own Id </h1>
+				<h1>get! their own Id </h1> //input main section ! 
 			</div>
 		);
 	

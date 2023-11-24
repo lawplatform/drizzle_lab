@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import { useState } from "react"
+import F_fileInput_drop from "../form/f_fileInput_drop"
 
 export default function B_upload_file() {
 	const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -19,7 +20,7 @@ export default function B_upload_file() {
 				<Button> pdf upload</Button>
 			</DialogTrigger>
 			<DialogContent>
-				example content
+				<F_fileInput_drop />
 
 			</DialogContent>
 
