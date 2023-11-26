@@ -14,9 +14,14 @@ import { user } from "./user";
 export const statusEnum = pgEnum('status', ['PENDING', 'PROCESSING', 'FAILDE', 'SUCCESS']);
 
 
-export const usersFileRelations = relations(user, ({ many }) => ({
-	file: many(file)
-}));
+
+
+export const storage = pgTable("storage", {
+	id: uuid("id").primaryKey().default(sql`gen_random_uuid()`),
+	userId: uuid("user_id").notNull().references(() => user.id, { onDelete: "cascade" }),
+
+})
+
 
 export const file = pgTable("file", {
 	id: uuid("id").primaryKey().default(sql`gen_random_uuid()`),
@@ -26,10 +31,13 @@ export const file = pgTable("file", {
 	key: text("key"),
 	createdAt: timestamp("created_at", { withTimezone: true, mode: 'string' }).defaultNow().notNull(),
 	updatedAt: timestamp("updated_at"),
-	userid: uuid("user_id").notNull().references(() => user.id, { onDelete: "cascade" }),
-
+	storageId: uuid("storage_id").notNull().references(() => storage.id, { onDelete: "cascade" }),
 
 })
 
 
+export const storageFileRelations = relations(storage, ({ many }) => ({
+	file: many(file)
+}));
 
+export type Newfile = typeof file.$inferInsert;

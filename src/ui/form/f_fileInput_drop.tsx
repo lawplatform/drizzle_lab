@@ -13,43 +13,6 @@ type FormInputs = {
 	file: FileList;
 };
 
-const generateUniqueId = () => {
-	return uuidv4();
-};
-
-
-async function getFiles(id: string, type: string) {
-	const { data, error } = await supabase.storage.from(type).list(id + "/", {
-		limit: 100,
-		offset: 0,
-		sortBy: { column: "name", order: "asc" }
-	});
-
-	if (data !== null) {
-
-	}
-
-
-}
-export const uploadFile = (files: File[], id: string, type: string) => {
-	const filePromises = files.map(async (file) => {
-		const { data, error } = await supabase.storage
-			.from('testBucket') // Replace with your actual storage bucket name
-			.upload(id + "/" + uuidv4(), file);
-
-		if (error) {
-			console.error('Error uploading file:', error.message);
-		}
-
-		if (data) {
-			getFiles(id, "testBucket")
-		}
-
-		return data;
-	});
-}
-
-
 
 
 

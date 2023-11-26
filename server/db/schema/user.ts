@@ -18,20 +18,6 @@ export const user = pgTable("user", {
 })
 
 
-export const usersRelations = relations(user, ({ one }) => ({
-	stripe: one(stripe)
-}));
-
-
-export const stripe = pgTable("stripe", {
-	userid: uuid("userId").notNull().references(() => user.id, { onDelete: "cascade" }),
-
-	stripeCustomerId: text("stripe_customer_id"),
-	stripeSubscriptionId: text("stripe_subscription_id"),
-	stripePriceId: text("stripe_price_id").notNull(),
-	stripeCurrentPeriodEnd: timestamp("stripe_current_period_end"),
-});
-
 
 export const accounts = pgTable("account", {
 	userId: uuid("userId").notNull().references(() => user.id, { onDelete: "cascade" }),

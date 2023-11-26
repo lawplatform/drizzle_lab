@@ -1,19 +1,18 @@
-"use client"
-import { Button } from '@/components/ui/button'
-import Image from 'next/image'
-import { signIn, signOut, useSession } from "next-auth/react"
-import Ex_Dropzone from '@/src/example/ex_dropzone';
-import FileDrop from '@/src/component/filedrop';
-import F_Dropzone from '@/src/ui/form/F_dropzone';
+"use client";
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import { signIn, signOut, useSession } from "next-auth/react";
+import Ex_Dropzone from "@/src/example/ex_dropzone";
+import FileDrop from "@/src/component/filedrop";
+import F_Dropzone from "@/src/ui/form/F_dropzone";
 export default function Home() {
 	const { data: session, status } = useSession();
 	return (
 		<main className="flex min-h-screen flex-col items-center justify-between p-24">
-			<F_Dropzone className={'px-1'} />
+			<F_Dropzone className={"px-1"} />
 
-
-			<Button onClick={() => signIn()} > singin.</Button>
-			<Button onClick={() => signOut()} > singOut</Button>
+			<Button onClick={() => signIn()}> singin.</Button>
+			<Button onClick={() => signOut()}> singOut</Button>
 
 			{session?.user ? (
 				<>
@@ -30,7 +29,6 @@ export default function Home() {
 			) : (
 				<div> you shold login this stage!</div>
 			)}
-
 		</main>
-	)
+	);
 }

@@ -82,7 +82,7 @@ export default function ScrollSyncAni({ model, animationName }: Sc_anime_sync_sc
 
 	function onModelLoaded(model: ILoadedModel) {
 		modelRef.current = model.rootMesh!
-		const initialAnimation = modelRef.current.getScene().getAnimationGroupByName("hook");
+		const initialAnimation = modelRef.current.getScene().getAnimationGroupByName("main");
 		if (initialAnimation) {
 			initialAnimation.stop();
 		}
@@ -134,10 +134,11 @@ export default function ScrollSyncAni({ model, animationName }: Sc_anime_sync_sc
 			<Model
 				ref={modelRef}
 				name="monkey"
+				rotation={new Vector3(0, 180, 0)}
 				rootUrl={`${baseUrl}`}
 				sceneFilename={model}
 				scaleToDimension={1}
-				position={new Vector3(0, 0, 0)}
+				position={new Vector3(-5, -8, -3)}
 				onModelLoaded={onModelLoaded}
 				scaling={new Vector3(0.5, 0.5, 0.5)}
 			/>

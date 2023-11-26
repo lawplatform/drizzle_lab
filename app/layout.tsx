@@ -5,6 +5,7 @@ import { fontNoto, fontPen, fontNanum } from '@/lib/fonts'
 import TrpcProvider from '@/server/trpc/trpcProvider'
 import { cn } from '@/lib/utils'
 import NextAuthProvider from '@/server/auth/authprovider'
+import { Toaster } from '@/components/ui/toaster'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -32,6 +33,7 @@ export default function RootLayout({
 				<NextAuthProvider>
 					<TrpcProvider>
 						{children}
+						<Toaster />
 					</TrpcProvider>
 				</NextAuthProvider>
 			</body>

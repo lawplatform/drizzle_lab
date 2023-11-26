@@ -1,27 +1,33 @@
-import { pgTable, foreignKey, pgEnum, text, uuid, timestamp, unique, primaryKey, integer } from "drizzle-orm/pg-core"
+import { pgTable, pgEnum, serial, text, integer, timestamp, varchar, foreignKey, unique, uuid, primaryKey } from "drizzle-orm/pg-core"
 
 import { sql } from "drizzle-orm"
-export const keyStatus = pgEnum("key_status", ['expired', 'invalid', 'valid', 'default'])
-export const keyType = pgEnum("key_type", ['stream_xchacha20', 'secretstream', 'secretbox', 'kdf', 'generichash', 'shorthash', 'auth', 'hmacsha256', 'hmacsha512', 'aead-det', 'aead-ietf'])
-export const factorType = pgEnum("factor_type", ['webauthn', 'totp'])
-export const factorStatus = pgEnum("factor_status", ['verified', 'unverified'])
-export const aalLevel = pgEnum("aal_level", ['aal3', 'aal2', 'aal1'])
-export const codeChallengeMethod = pgEnum("code_challenge_method", ['plain', 's256'])
+export const userSystemEnum = pgEnum("user_system_enum", ['user', 'system'])
 export const status = pgEnum("status", ['SUCCESS', 'FAILDE', 'PROCESSING', 'PENDING'])
 
 
-export const session = pgTable("session", {
-	sessionToken: text("sessionToken").primaryKey().notNull(),
-	useId: uuid("useId").notNull().references(() => user.id, { onDelete: "cascade" } ),
-	expires: timestamp("expires", { mode: 'string' }).notNull(),
+export const aiDocuments = pgTable("ai_documents", {
+	id: serial("id").primaryKey().notNull(),
+	content: text("content").notNull(),
+	// TODO: failed to parse database type 'vector(3)'
+	embedding: unknown("embedding"),
+	token: integer("token"),
 });
 
-export const stripe = pgTable("stripe", {
-	userId: uuid("userId").notNull().references(() => user.id, { onDelete: "cascade" } ),
-	stripeCustomerId: text("stripe_customer_id"),
-	stripeSubscriptionId: text("stripe_subscription_id"),
-	stripePriceId: text("stripe_price_id").notNull(),
-	stripeCurrentPeriodEnd: timestamp("stripe_current_period_end", { mode: 'string' }),
+export const aiChats = pgTable("ai_chats", {
+	id: serial("id").primaryKey().notNull(),
+	pdfName: text("pdf_name").notNull(),
+	pdfUrl: text("pdf_url").notNull(),
+	createdAt: timestamp("created_at", { mode: 'string' }).defaultNow().notNull(),
+	userId: varchar("user_id", { length: 256 }).notNull(),
+	fileKey: text("file_key").notNull(),
+});
+
+export const aiMessages = pgTable("ai_messages", {
+	id: serial("id").primaryKey().notNull(),
+	chatId: integer("chat_id").notNull().references(() => aiChats.id),
+	content: text("content").notNull(),
+	createdAt: timestamp("created_at", { mode: 'string' }).defaultNow().notNull(),
+	role: userSystemEnum("role").notNull(),
 });
 
 export const user = pgTable("user", {
@@ -35,6 +41,12 @@ export const user = pgTable("user", {
 	return {
 		userEmailUnique: unique("user_email_unique").on(table.email),
 	}
+});
+
+export const session = pgTable("session", {
+	sessionToken: text("sessionToken").primaryKey().notNull(),
+	useId: uuid("useId").notNull().references(() => user.id, { onDelete: "cascade" } ),
+	expires: timestamp("expires", { mode: 'string' }).notNull(),
 });
 
 export const file = pgTable("file", {
