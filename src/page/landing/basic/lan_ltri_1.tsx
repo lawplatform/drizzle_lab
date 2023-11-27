@@ -16,10 +16,10 @@ export default function Lan_ltri_1({
 	img,
 }: Lan_lri_1Props) {
 	return (
-		<section className="relative -mt-24 pt-2">
+		<section className="z-1 relative -mt-24 pt-2">
 			<div className="container">
 				<div className="-mx-3 flex flex-wrap items-center">
-					<div className="w-full px-3 lg:w-1/2">
+					<div className="w-full px-3 md:px-32 lg:w-1/2">
 						<div className="py-12">
 							<div className="mx-auto mb-8 max-w-lg text-center lg:mx-0 lg:max-w-md lg:text-left">
 								<h2 className="font-heading  mb-4 text-3xl font-bold lg:text-5xl">

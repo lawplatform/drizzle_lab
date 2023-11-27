@@ -1,128 +1,60 @@
-'use client'
+import anime from "animejs"
+import { useEffect } from "react"
 
-import { ShoppingCart } from 'lucide-react'
-
-import { formatPrice } from '@/lib/utils'
-import Link from 'next/link'
-import Image from 'next/image'
-import CartItem from './CartItem'
-import { useEffect, useState } from 'react'
-import { Sheet, SheetContent, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
-import { Separator } from '@/components/ui/separator'
-import { buttonVariants } from '@/components/ui/button'
-import { ScrollArea } from '@/components/ui/scroll-area'
-
-const Cart = () => {
-	const { items } = ["ar", "arst", "arst"]
-	const itemCount = 20;
-
-	const [isMounted, setIsMounted] = useState<boolean>(false)
-
+export default function Hero() {
 	useEffect(() => {
-		setIsMounted(true)
+
+		const title = anime({
+			targets: ".title",
+			keyframes: [
+
+				{ translateY: 100 },
+				{ opacity: 100 },
+				{ scaleX: +1 },
+				{ scaleY: +1 },
+				{ translateY: 0 }
+			],
+			duration: 3000,
+			autoplay: false,
+			loop: true,
+			easing: 'easeInElastic(1, .6)',
+		})
+
+		const sub = anime({
+			targets: ".sub",
+			keyframes: [
+
+				{ translateX: 100 },
+				{ translateY: 40 },
+				{ translateX: 0 },
+				{ translateY: 0 }
+			],
+			duration: 3000,
+			autoplay: false,
+		})
+		title.play();
+		sub.play();
 	}, [])
-
-	const cartTotal = items.reduce(
-		(total, { product }) => total + product.price,
-		0
-	)
-
-
-
-	const fee = 1
-
 	return (
-		<Sheet>
-			<SheetTrigger className='group -m-2 flex items-center p-2'>
-				<ShoppingCart
-					aria-hidden='true'
-					className='h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500'
-				/>
-				<span className='ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800'>
-					{isMounted ? itemCount : 0}
-				</span>
-			</SheetTrigger>
-			<SheetContent className='flex w-full flex-col pr-0 sm:max-w-lg'>
-				<SheetHeader className='space-y-2.5 pr-6'>
-					<SheetTitle>Cart ({itemCount})</SheetTitle>
-				</SheetHeader>
-				{itemCount > 0 ? (
-					<>
-						<div className='flex w-full flex-col pr-6'>
-							<ScrollArea>
-								// {items.map(({ product }) => (
-									// <CartItem
-										// product={product}
-										// key={product.id}
-									// />
-								// ))}
-							</ScrollArea>
-						</div>
-						<div className='space-y-4 pr-6'>
-							<Separator />
-							<div className='space-y-1.5 text-sm'>
-								<div className='flex'>
-									<span className='flex-1'>Shipping</span>
-									<span>Free</span>
-								</div>
-								<div className='flex'>
-									<span className='flex-1'>
-										Transaction Fee
-									</span>
-									<span>{formatPrice(fee)}</span>
-								</div>
-								<div className='flex'>
-									<span className='flex-1'>Total</span>
-									<span>
-										{formatPrice(cartTotal + fee)}
-									</span>
-								</div>
-							</div>
-
-							<SheetFooter>
-								<SheetTrigger asChild>
-									<Link
-										href='/cart'
-										className={buttonVariants({
-											className: 'w-full',
-										})}>
-										Continue to Checkout
-									</Link>
-								</SheetTrigger>
-							</SheetFooter>
-						</div>
-					</>
-				) : (
-					<div className='flex h-full flex-col items-center justify-center space-y-1'>
-						<div
-							aria-hidden='true'
-							className='relative mb-4 h-60 w-60 text-muted-foreground'>
-							<Image
-								src='/hippo-empty-cart.png'
-								fill
-								alt='empty shopping cart hippo'
-							/>
-						</div>
-						<div className='text-xl font-semibold'>
-							Your cart is empty
-						</div>
-						<SheetTrigger asChild>
-							<Link
-								href='/products'
-								className={buttonVariants({
-									variant: 'link',
-									size: 'sm',
-									className:
-										'text-sm text-muted-foreground',
-								})}>
-								Add items to your cart to checkout
-							</Link>
-						</SheetTrigger>
+		<section>
+			<div>
+				<div>
+					<div className="mb-6 pt-56 text-white">
+						<h2 className="font-heading title relative mt-4 text-3xl font-bold opacity-5 md:text-7xl">
+							This is company name
+						</h2>
 					</div>
-				)}
-			</SheetContent>
-		</Sheet>
+					<div className="mb-8 flex justify-center">
+						<div className="pl-4">
+							<p className="font-noto sub max-w-2xl text-xl text-gray-400 md:text-2xl">
+								Imagine being able to spent less time...
+								This is a demonstration landing
+								page made with tailwindcss
+							</p>
+						</div>
+					</div>
+				</div >
+			</div>
+		</section>
 	)
 }
-
-export default Cart

@@ -8,6 +8,7 @@ import SC_isometric from "@/src/babylon/scene/SC_isometric";
 import ScrollSyncAni from "@/src/babylon/components/scrollSyncAni";
 import Sc_scroll from "@/src/babylon/scene/Sc_scroll";
 import { Engine, Scene, useScene } from "react-babylonjs";
+import Lan_ltri_1 from "@/src/page/landing/basic/lan_ltri_1";
 
 
 var keys = [];
@@ -66,14 +67,19 @@ export default function Home() {
 
 					<hemisphericLight
 						name="light1"
-						intensity={1}
+						intensity={3}
 						direction={new Vector3(0, 1, 0)}
 					/>
 					<ScrollSyncAni model={"city.glb"} animationName={"main"} />
 				</Scene>
 			</Engine>
 
-			<div id="sc" className="wrap h-full bg-red-100 px-10">
+			<div id="sc" className="wrap z-40  mx-auto h-full justify-center bg-slate-800 px-10">
+				<Lan_ltri_1 description={"rst"} img={"/landing/landing_2.jpg"} >
+					<p>hello</p>
+					<p>hello</p>
+					<p>hello</p>
+				</Lan_ltri_1>
 				<section className="sc h-screen">aar!</section>
 				<section className="sc h-screen">br</section>
 				<section className="sc h-screen">c2</section>

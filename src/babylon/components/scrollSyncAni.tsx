@@ -1,10 +1,10 @@
 //automatically sync with scroll animation 
 "use client"
-import { AbstractMesh, ArcRotateCamera, Color4, Nullable, Vector3, Animation, AnimationGroup } from '@babylonjs/core'
+import { AbstractMesh, ArcRotateCamera, Color4, Nullable, Vector3, Animation, AnimationGroup, Color3, CubeTexture, Texture } from '@babylonjs/core'
 import { Engine, Scene, Camera, useScene, useCanvas, Model, ILoadedModel, } from 'react-babylonjs'
 import "@babylonjs/loaders/glTF";
 import Scroll_css from "@/src/scroll/scroll_css";
-import { Suspense, useEffect, useRef } from "react";
+import { Suspense, useCallback, useEffect, useRef, useState } from "react";
 import Lenis from '@studio-freight/lenis'
 import "./scrollSyncAni.css";
 
@@ -76,9 +76,32 @@ interface Sc_anime_sync_scroll_props {
 
 }
 export default function ScrollSyncAni({ model, animationName }: Sc_anime_sync_scroll_props) {
+
 	const modelRef = useRef<Nullable<AbstractMesh>>(null);
 	const transformRef = useRef(null)
 	let baseUrl = '/glb/';
+
+	const [_, setTexturesLoaded] = useState(false)
+
+	const cubeTextureRef = useRef<CubeTexture | undefined>(undefined)
+	const cubeTextureCloneRef = useRef<CubeTexture | undefined>(undefined)
+
+	const cubeTextureCallback = useCallback((node: CubeTexture | null) => {
+		if (node) {
+			cubeTextureRef.current = node
+			console.log('hdrTexture', node)
+			// hdrTexture = node;
+
+			cubeTextureCloneRef.current = node.clone()
+			cubeTextureCloneRef.current.name = 'cloned texture'
+			cubeTextureCloneRef.current.coordinatesMode = Texture.SKYBOX_MODE
+
+			setTexturesLoaded(true) // trigger render and props assignment
+		}
+	}, [])
+
+
+
 
 	function onModelLoaded(model: ILoadedModel) {
 		modelRef.current = model.rootMesh!
@@ -131,6 +154,7 @@ export default function ScrollSyncAni({ model, animationName }: Sc_anime_sync_sc
 	return (
 		<Suspense fallback={
 			<box name="fallback" position={new Vector3(0, 0, 0)} />}>
+
 			<Model
 				ref={modelRef}
 				name="monkey"
@@ -141,7 +165,20 @@ export default function ScrollSyncAni({ model, animationName }: Sc_anime_sync_sc
 				position={new Vector3(-5, -8, -3)}
 				onModelLoaded={onModelLoaded}
 				scaling={new Vector3(0.5, 0.5, 0.5)}
-			/>
+			>
+
+				<pbrMaterial
+					name="sphereGlass1mat"
+					reflectionTexture={cubeTextureRef.current}
+					refractionTexture={cubeTextureRef.current}
+					linkRefractionWithTransparency
+					indexOfRefraction={0.52}
+					alpha={0}
+					microSurface={1}
+					reflectivityColor={new Color3(0.2, 0.2, 0.2)}
+					albedoColor={new Color3(0.85, 0.85, 0.85)}
+				/>
+			</Model>
 		</Suspense>
 	)
 }

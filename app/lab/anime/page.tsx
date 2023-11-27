@@ -5,7 +5,9 @@ import anime from "animejs"
 import Lenis from '@studio-freight/lenis'
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress"
-import Bar_progress from "@/src/ui/bar/bar_progress";
+import Section_1 from "@/components/work/lawplatform/section_1";
+
+
 export default function Home() {
 	//smooth scrolling by lenis 
 	const lenis = new Lenis();
@@ -14,9 +16,7 @@ export default function Home() {
 		requestAnimationFrame(raf)
 	}
 	requestAnimationFrame(raf)
-	//get current mouse posistion 
 
-	//allocated scroll animation 
 	useEffect(() => {
 		const green = anime({
 			targets: ".scroll-box",
@@ -45,9 +45,7 @@ export default function Home() {
 	}, [])
 	//allocated intersectino callback 
 	useEffect(() => {
-		const box = document.querySelector('.box');
-		const container = document.querySelector('.container');
-
+		const box = document.querySelector('.watch');
 		const aniBox = anime({
 			targets: ".moving-box",
 			keyframes: [
@@ -69,7 +67,9 @@ export default function Home() {
 			threshold: 0.3,
 			rootMargin: "-100px",
 		}
-		const callbackFunction = (entries: IntersectionObserverEntry[]) => {
+		const intersectEvent = (entries: IntersectionObserverEntry[]) => {
+			console.log("intersectiong");
+
 			const [entry] = entries;
 			const targetElement = entry.target as HTMLElement;
 			if (entry.isIntersecting) {
@@ -79,7 +79,7 @@ export default function Home() {
 			}
 		}
 		if (box) {
-			const theObserver = new IntersectionObserver(callbackFunction, options);
+			const theObserver = new IntersectionObserver(intersectEvent, options);
 			theObserver.observe(box);
 		}
 	}
@@ -108,12 +108,14 @@ export default function Home() {
 				<div className="b-10 moving-box top-55 fixed left-1  w-10 bg-slate-200">aa</div>
 				<div className="b-10 moving-box fixed left-1 top-60 w-10 bg-slate-200">bb</div>
 				<div className="b-10 moving-box fixed left-1 top-52  w-10 bg-gray-200">cc</div>
+
 				<section className="bg-red-100">First section ? </section>
-				<section className="second bg-green-100">second section ?
+				<section className="second watch bg-green-100">second section ?
 					<div className="box h-10 w-10 bg-yellow-100">box</div>
 				</section>
 				<section className="bg-blue-100">third section ?
 					<div className="box-2 h-10 w-10 bg-yellow-100">box</div></section>
+				<Section_1 />
 			</div>
 		</div>
 	)

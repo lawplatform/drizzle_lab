@@ -7,6 +7,8 @@ export default function Sec_contact() {
 	return (
 		<div>
 			<section className="py-20">
+				<div className="main left-30 relative top-[350px]  w-20 bg-green-200">moving moving</div>
+				<div className="sub relative left-60 top-[450px]  w-20 bg-blue-200">moving moving</div>
 				<div className="w-full">
 					<Text_menu_title title={"how"} description={"ismine"} />
 					<Layout_row_title_desrcription>
