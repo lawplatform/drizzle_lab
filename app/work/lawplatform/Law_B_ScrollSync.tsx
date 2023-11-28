@@ -1,5 +1,5 @@
 "use client"
-import { Scene as BS, AbstractMesh, ArcRotateCamera, Color4, Nullable, Vector3, Animation, AnimationGroup, Color3, CubeTexture, Texture, PointLight, MeshBuilder, GizmoManager, PositionGizmo, DirectionalLight, HemisphericLight, StandardMaterial, ColorCorrectionPostProcess, SpotLight, FresnelParameters, PBRMaterial, } from '@babylonjs/core'
+import { Scene as BS, AbstractMesh, ArcRotateCamera, Color4, Nullable, Vector3, Animation, AnimationGroup, Color3, CubeTexture, Texture, PointLight, MeshBuilder, GizmoManager, PositionGizmo, DirectionalLight, HemisphericLight, StandardMaterial, ColorCorrectionPostProcess, SpotLight, FresnelParameters, PBRMaterial, Tools, } from '@babylonjs/core'
 import { Engine, Scene, Camera, useScene, useCanvas, Model, ILoadedModel, } from 'react-babylonjs'
 import "@babylonjs/loaders/glTF";
 import Scroll_css from "@/src/scroll/scroll_css";
@@ -81,9 +81,6 @@ export default function Law_B_ScrollSync({ model, animationName }: Sc_anime_sync
 	const transformRef = useRef(null)
 	let baseUrl = '/glb/';
 
-
-
-
 	function onModelLoaded(model: ILoadedModel) {
 		modelRef.current = model.rootMesh!
 		const initialAnimation = modelRef.current.getScene().getAnimationGroupByName("main");
@@ -137,24 +134,36 @@ export default function Law_B_ScrollSync({ model, animationName }: Sc_anime_sync
 
 			var light = new DirectionalLight("sunlight", new Vector3(0, 0, 10), scene);
 			light.position = new Vector3(0, 0, 0);
-			light.intensity = 25; // Adjust the intensity as needed
+			light.intensity = 10; // Adjust the intensity as needed
+			light.diffuse = new Color3(1, 0.8, 0.6); // Set to white
 			// Apply a blur post-process
-			//
-			var warmLight = new HemisphericLight("warmLight", new Vector3(0, 1, 20), scene);
-			warmLight.diffuse = new Color3(1, 0.8, 0.6);
-			warmLight.intensity = 25;
-			warmLight.range = 150;
-			var pointLight1 = new PointLight("pointLight1", new Vector3(5, 5, 5), scene);
-			pointLight1.diffuse = new Color3(1, 0.8, 0.6); // Adjust the color as needed
-			pointLight1.intensity = 25; // Adjust the intensity
+			var hemisphericLight = new HemisphericLight("hemiLight", new Vector3(0, 1, 0), scene);
+			hemisphericLight.diffuse = new Color3(0.7, 0.7, 1); // Blue tint for ambient light
 
-			var pointLight2 = new PointLight("pointLight2", new Vector3(-5, 5, -5), scene);
-			pointLight2.diffuse = new Color3(1, 0.8, 0.6); // Adjust the color as needed
-			pointLight2.intensity = 25; // Adjust the intensity
-			scene.ambientColor = new Color3(1, 1, 1); // Adjust as needed
-			console.log(scene.activeCameras);
+			var buildingMaterial = new PBRMaterial("buildingMaterial", scene);
 
+			// Set PBR material properties
+			buildingMaterial.albedoColor = new Color3(1, 1, 1); // Base color
+			buildingMaterial.metallic = 0.0; // Metallicness (0 to 1)
+			buildingMaterial.roughness = 0.5; // Roughness (0 to 1)
+			if (modelRef.current != null) {
+				modelRef.current.material = buildingMaterial;
+			}
 
+			//add spot light
+			var Spotlight = new SpotLight(
+				"spot",
+				new Vector3(0, 2.8, 0),
+				new Vector3(0, -1, 0),
+				Tools.ToRadians(160),
+				1,
+				scene
+			);
+			Spotlight.intensity = 20;
+
+			scene.fogMode = BS.FOGMODE_EXP;
+			scene.fogColor = new Color3(0.5, 0.8, 1.0); // Aqua color
+			scene.fogDensity = 0.01;
 		}
 
 
@@ -172,7 +181,7 @@ export default function Law_B_ScrollSync({ model, animationName }: Sc_anime_sync
 				rootUrl={`${baseUrl}`}
 				sceneFilename={model}
 				scaleToDimension={1}
-				position={new Vector3(0, 0, 0)}
+				position={new Vector3(-2, 2, -2)}
 				onModelLoaded={onModelLoaded}
 				scaling={new Vector3(1, 1, 1)}
 			/>

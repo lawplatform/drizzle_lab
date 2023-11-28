@@ -84,3 +84,9 @@ async function sendToGpt(msg: [{ sender: string, message: string }]) {
 		//setmesegs([...old,{message:data.choices[0].message.content,sender:"ai"}])
 	});
 }
+
+export const function AiChatbot() {
+	return (
+		<Button>hello this Is Ai chat bot </Button>
+	)
+}

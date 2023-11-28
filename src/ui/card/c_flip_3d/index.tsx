@@ -1,12 +1,15 @@
 import './C_flip_3d.css'
 export default function C_Flip_3d() {
+	const handleTouch = () => {
+		console.log("it touched somethign");
+	}
 	return (
-		<div className="card">
+		<div className="card" onTouchStart={handleTouch} >
 			<div className="card__content">
 
 				<div className="card__front">
-					<h3 className="card__title">The Fair</h3>
-					<p className="card__subtitle">Time for some fun</p>
+					<h3 className="card__title"> A </h3>
+					<p className="card__subtitle">build something valuable</p>
 				</div>
 
 				<div className="card__back">
@@ -14,6 +17,6 @@ export default function C_Flip_3d() {
 				</div>
 
 			</div>
-		</div>
+		</div >
 	)
 }

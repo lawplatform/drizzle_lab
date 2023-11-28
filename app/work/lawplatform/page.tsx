@@ -18,7 +18,7 @@ export default function Home() {
 	return (
 		<div>
 			<Seca_wrapper >
-				<Law_canvas animationName={"main"} model={"box.glb"} />
+				<Law_canvas />
 				<Law_Hero />
 				<Law_feature />
 				<Law_vision />

@@ -17,13 +17,9 @@ const options = {
 	rootMargin: "-100px",
 }
 
-const keyframes: FrameType = {
+const keyframes_main: FrameType = {
 	frame_1_m: [
-		{ translateX: 200 },
-		{ translateY: 200 },
-		{ translateY: -100 },
-		{ translateX: 5 },
-		{ translateX: -500 },
+		{ translateX: +100, translateY: -50 },
 	],
 	frame_2_m: [
 		{ translateY: -40 },
@@ -34,6 +30,21 @@ const keyframes: FrameType = {
 	],
 	// Add more frame definitions as needed
 };
+
+const keyframes_sub: FrameType = {
+	frame_1_s: [
+		{ translateX: +150, translateY: -10 },
+	],
+	frame_2_m: [
+		{ translateY: -40 },
+		{ translateX: +20 },
+		{ translateX: +40 },
+		{ translateY: -20 },
+		{ translateY: -20 },
+	],
+	// Add more frame definitions as needed
+};
+
 
 
 const scrollAni = () => {
@@ -54,7 +65,7 @@ const scrollAni = () => {
 }
 
 const mainAni = (frameName: string) => {
-	const frame: { [key: string]: number | string }[] | undefined = keyframes[frameName];
+	const frame: { [key: string]: number | string }[] | undefined = keyframes_main[frameName];
 	if (frame) {
 		return anime({
 			targets: ".main",
@@ -63,13 +74,15 @@ const mainAni = (frameName: string) => {
 			loop: false,
 			direction: 'alternate',
 			autoplay: true,
-			duration: 3000,
+			duration: 6000,
+			easing: 'spring(1, 80, 10, 0)',
 
 		})
 	}
 }
 
-const subAni = (frame: any[]) => {
+const subAni = (frameName: string) => {
+	const frame: { [key: string]: number | string }[] | undefined = keyframes_sub[frameName];
 	return anime({
 		targets: ".sub",
 		keyframes: frame,
@@ -84,18 +97,24 @@ const subAni = (frame: any[]) => {
 
 const allocateAnimation = (obj: Element, index: number) => {
 	const frameString: string = "frame_" + index.toString() + "_m";
+	const frameString_sub: string = "frame_" + index.toString() + "_s";
 	let ani_main = mainAni(frameString);
-	//let ani_sub = subAni("frame_1_s");
+	let ani_sub = subAni(frameString_sub);
 	const intersectEvent = (entries: IntersectionObserverEntry[]) => {
 		const [entry] = entries;
 		const targetElement = entry.target as HTMLElement;
-		if (entry.isIntersecting && ani_main) {
+		const isMobile = window.innerWidth <= 768;
+
+		console.log(isMobile)
+
+		if (entry.isIntersecting && ani_main && !isMobile) {
+
 			ani_main.play();
-			// ani_sub.play();
+			ani_sub.play();
 		} else {
 			if (ani_main) {
 				ani_main.pause();
-				// ani_sub.pause();
+				ani_sub.pause();
 			}
 		}
 	}

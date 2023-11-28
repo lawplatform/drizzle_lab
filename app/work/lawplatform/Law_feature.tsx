@@ -1,28 +1,45 @@
-import Text_info_1 from "@/src/ui/text/text_info_1";
+import C_Flip_3d from "@/src/ui/card/c_flip_3d";
+
+const frame_temp = [
+	{ translateY: -40 },
+	{ translateX: +20 },
+	{ translateX: +40 },
+	{ translateY: -20 },
+	{ translateY: -20 },
+];
 
 export default function Law_feature() {
 	return (
 
 		<section>
 
-			<div className="z-10">
+			<div className="watch z-10 pt-20">
 				<div>
-
-					<div className="mb-6 pt-56 text-white">
-						<h2 className="font-heading title relative mt-4 text-3xl font-bold opacity-5 md:text-8xl">
-							feature
-						</h2>
-					</div>
-					<div className="mb-8 flex justify-center">
-						<div className="pl-4">
-							<p className=" font-noto sub text-gray-150 max-w-2xl text-xl opacity-5 md:text-2xl">
-								what we are doing
+					<div className="flex flex-col sm:flex-row">
+						<div className=" mr-10 text-white">
+							<h2 className="font-heading  main relative mt-4 text-3xl  font-bold md:text-8xl">
+								Feature..
+							</h2>
+							<p className=" font-noto text-gray-150 sub max-w-2xl  text-xl md:text-2xl">
+								what we are doiarst
 							</p>
+						</div>
+
+						<div className="gird-cols-1 md: ml-32 mt-12 grid grid-cols-1 gap-10 ">
+							<div className="sub">
+								<C_Flip_3d />
+							</div>
+							<div className="sub">
+								<C_Flip_3d />
+							</div>
+							<div className="sub">
+								<C_Flip_3d />
+							</div>
 						</div>
 					</div>
 				</div >
 			</div>
-		</section>
+		</section >
 
 
 	)

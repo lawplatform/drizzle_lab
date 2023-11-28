@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import { toast } from "@/components/ui/use-toast"
 import supabase from "@/src/provider/supabase"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Mail, User2, Lock, File } from "lucide-react"
@@ -57,6 +58,10 @@ export default function F_contact() {
 				console.error('Error:', error);
 			});
 		form.reset();
+		toast({
+			title: "✅ 전송 성공",
+			description: "메세지 전달이 성공적으로 이루어 졌습니다",
+		})
 	}
 
 

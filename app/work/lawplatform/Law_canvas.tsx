@@ -18,8 +18,22 @@ export default function Law_canvas() {
 			}} >
 				<Scene
 					clearColor={new Color4(0, 0, 0, 0)}>
+					<arcRotateCamera
+						radius={4}
+						name="camera1"
+						alpha={Math.PI / 10}  // Slightly rotate around the Y-axis
+						beta={20}   // Slightly rotate above the XZ plane
+						target={Vector3.Zero()}
+						lowerRadiusLimit={3}
+						upperRadiusLimit={3}
+						lowerBetaLimit={Math.PI / 5}  // Fixed angle above the XZ plane
+						upperBetaLimit={Math.PI / 5}
+						lowerAlphaLimit={Math.PI / 4.5}  // Adjust the lower limit for XZ rotation
+						upperAlphaLimit={Math.PI / 4.5}  // Adjust the upper limit for XZ rotatio
+					/>
 
-					<freeCamera name="camera1" position={new Vector3(2, 20, -5)} rotation={new Vector3(0, 0, 0)} setTarget={[Vector3.Zero()]} />
+
+
 					<hemisphericLight
 						name="light1"
 						intensity={20}
@@ -27,7 +41,7 @@ export default function Law_canvas() {
 						diffuse={new Color3(0, 0, 0)}
 					/>
 
-					<Law_B_ScrollSync model={"city.glb"} animationName={"main"} />
+					<Law_B_ScrollSync model={"city_test.glb"} animationName={"main"} />
 
 				</Scene>
 			</Engine>

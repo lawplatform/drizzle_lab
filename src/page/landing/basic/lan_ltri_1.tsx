@@ -1,8 +1,6 @@
-import TextEffect from "@/src/ui/effect/textEffect";
 import Link from "next/link";
 import { ReactNode } from "react";
 import Image from 'next/image'
-import ReactTypingEffect from "react-typing-effect";
 
 interface Lan_lri_1Props {
 	children: ReactNode[];
