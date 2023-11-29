@@ -2,12 +2,9 @@ import Text_info_1 from "@/src/ui/text/text_info_1";
 
 export default function Law_vision() {
 	return (
-
 		<section>
-
 			<div className="z-10">
 				<div>
-
 					<div className="mb-6 pt-56 text-white">
 						<h2 className="font-heading relative mt-4 text-3xl font-bold  md:text-8xl">
 							Vision
@@ -19,11 +16,11 @@ export default function Law_vision() {
 								what we isour vision
 							</p>
 						</div>
+
+
 					</div>
-				</div >
+				</div>
 			</div>
 		</section>
-
-
-	)
+	);
 }

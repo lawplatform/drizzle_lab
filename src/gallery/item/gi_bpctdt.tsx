@@ -10,14 +10,14 @@ interface gi_bpctdt_prop {
 }
 export default function Gi_bpctdt({ day, img, description, month, title, category, time }: gi_bpctdt_prop) {
 	return (
-		<div className="mx-auto max-w-screen-xl p-5 sm:p-10 md:p-16">
-			<div className="grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3">
+		<div className="mx-auto w-[800px] transition-all  hover:translate-y-3">
+			<div className="grid  grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3">
 				<div className="overflow-hidden rounded shadow-lg">
 
 					<a href="#"></a>
 					<div className="relative">
 						<a href="#">
-							<div className='h-[200px] bg-red-100'>
+							<div className='h-[200px]'>
 								<Image className="w-full "
 									loading="lazy"
 									layout="fill"
@@ -38,14 +38,12 @@ export default function Gi_bpctdt({ day, img, description, month, title, categor
 
 						</a>
 
-						<a href="!#">
-							<div
-								className="absolute right-0 top-0 mr-3 mt-3 flex h-16 w-16 flex-col items-center justify-center rounded-full bg-indigo-600 px-4 pb-2 text-sm text-white transition duration-500 ease-in-out hover:bg-white hover:text-indigo-600">
-								<small>{month}</small>
-								<span className="font-bold">{day}</span>
+						<div
+							className="absolute right-0 top-0 mr-3 mt-3 flex h-16 w-16 flex-col items-center justify-center rounded-full bg-indigo-600 px-4 pb-2 text-sm text-white transition duration-500 ease-in-out hover:bg-white hover:text-indigo-600">
+							<small>{month}</small>
+							<span className="font-bold">{day}</span>
 
-							</div>
-						</a>
+						</div>
 					</div>
 					<div className="px-6 py-4">
 
@@ -57,7 +55,7 @@ export default function Gi_bpctdt({ day, img, description, month, title, categor
 						</p>
 					</div>
 					<div className="flex flex-row items-center px-6 py-4">
-						<span href="#" className="font-regular mr-1 flex flex-row items-center py-1 text-sm text-gray-900">
+						<span className="font-regular mr-1 flex flex-row items-center py-1 text-sm text-gray-900">
 							<svg height="13px" width="13px" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 512 512" >
 								<g>
 									<g>
@@ -67,7 +65,7 @@ export default function Gi_bpctdt({ day, img, description, month, title, categor
 									</g>
 								</g>
 							</svg>
-							<span className="ml-1">6 mins ago</span></span>
+							<span className="ml-1">6 분전 </span></span>
 					</div>
 				</div>
 			</div>

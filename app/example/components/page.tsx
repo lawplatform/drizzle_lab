@@ -1,3 +1,4 @@
+"use client"
 import C_info from "@/src/ui/card/C_info";
 import C_Basic from "@/src/ui/card/c_Basic";
 import C_Profile from "@/src/ui/card/c_Profile";

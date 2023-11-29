@@ -10,6 +10,10 @@ import Law_feature from "./Law_feature";
 import Law_vision from "./Law_vision";
 import Law_contact from "./Law_contact";
 import Law_canvas from "./Law_canvas";
+import Law_scroll_wrapper from "./Law_scroll_wrapper";
+
+
+
 export default function Home() {
 
 	useEffect(() => {
@@ -17,13 +21,13 @@ export default function Home() {
 	}, [])
 	return (
 		<div>
-			<Seca_wrapper >
+			<Law_scroll_wrapper>
 				<Law_canvas />
 				<Law_Hero />
 				<Law_feature />
 				<Law_vision />
 				<Law_contact />
-			</Seca_wrapper>
+			</Law_scroll_wrapper>
 		</div>
 
 	)

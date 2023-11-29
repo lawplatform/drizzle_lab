@@ -9,6 +9,8 @@ import Section_1 from "@/components/work/lawplatform/section_1";
 import Seca_section_1 from "./seca_section_1";
 import C_Flip_3d from "@/src/ui/card/c_flip_3d";
 import Sec_contact from "../section/sec_contact";
+import { State$ } from "./State";
+import { useScene } from "react-babylonjs";
 
 type FrameType = { [key: string]: { [key: string]: number | string }[] };
 const options = {
@@ -19,7 +21,7 @@ const options = {
 
 const keyframes_main: FrameType = {
 	frame_1_m: [
-		{ translateX: 450, translateY: -200 },
+		{ translateX: +100, translateY: -50 },
 	],
 	frame_2_m: [
 		{ translateY: -40 },
@@ -33,7 +35,7 @@ const keyframes_main: FrameType = {
 
 const keyframes_sub: FrameType = {
 	frame_1_s: [
-		{ translateX: +300, translateY: -300 },
+		{ translateX: +150, translateY: -10 },
 	],
 	frame_2_m: [
 		{ translateY: -40 },
@@ -74,7 +76,7 @@ const mainAni = (frameName: string) => {
 			loop: false,
 			direction: 'alternate',
 			autoplay: true,
-			duration: 3000,
+			duration: 6000,
 			easing: 'spring(1, 80, 10, 0)',
 
 		})
@@ -82,7 +84,7 @@ const mainAni = (frameName: string) => {
 }
 
 const subAni = (frameName: string) => {
-	const frame: { [key: string]: number | string }[] | undefined = keyframes_main[frameName];
+	const frame: { [key: string]: number | string }[] | undefined = keyframes_sub[frameName];
 	return anime({
 		targets: ".sub",
 		keyframes: frame,
@@ -94,16 +96,20 @@ const subAni = (frameName: string) => {
 
 	})
 }
-
 const allocateAnimation = (obj: Element, index: number) => {
 	const frameString: string = "frame_" + index.toString() + "_m";
 	const frameString_sub: string = "frame_" + index.toString() + "_s";
 	let ani_main = mainAni(frameString);
-	let ani_sub = subAni("frame_1_s");
+	let ani_sub = subAni(frameString_sub);
 	const intersectEvent = (entries: IntersectionObserverEntry[]) => {
 		const [entry] = entries;
 		const targetElement = entry.target as HTMLElement;
-		if (entry.isIntersecting && ani_main) {
+		const isMobile = window.innerWidth <= 768;
+
+		//if screen size is mobile animation not play 
+
+		if (entry.isIntersecting && ani_main && !isMobile) {
+
 			ani_main.play();
 			ani_sub.play();
 		} else {
@@ -114,7 +120,6 @@ const allocateAnimation = (obj: Element, index: number) => {
 		}
 	}
 
-
 	if (obj) {
 		const theObserver = new IntersectionObserver(intersectEvent, options);
 		theObserver.observe(obj);
@@ -123,7 +128,7 @@ const allocateAnimation = (obj: Element, index: number) => {
 
 
 
-export default function Seca_wrapper({ children }: {
+export default function Law_scroll_wrapper({ children }: {
 	children: React.ReactNode
 }) {
 	//smooth scrolling by lenis 

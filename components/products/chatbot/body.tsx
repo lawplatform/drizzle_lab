@@ -34,7 +34,7 @@ interface Message {
 }
 export default function Chatbot_Body() {
 	const { messages, input, handleInputChange, handleSubmit } = useChat({ api: "/api/chat/ai" });
-	const scrollAreaRef = useRef(null);
+	const scrollAreaRef = useRef<HTMLDivElement>(null);
 	useEffect(() => {
 		if (scrollAreaRef.current) {
 			scrollAreaRef.current!.scrollTop = scrollAreaRef.current!.scrollHeight;

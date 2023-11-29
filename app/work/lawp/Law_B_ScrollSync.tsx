@@ -6,6 +6,8 @@ import Scroll_css from "@/src/scroll/scroll_css";
 import { Suspense, useCallback, useEffect, useRef, useState } from "react";
 import Lenis from '@studio-freight/lenis'
 import "./Law_canvas.css";
+import { observable, observe } from '@legendapp/state';
+import { hexToColor3 } from '@/src/babylon/utils/utils';
 
 interface lenisEvent {
 	animate: {
@@ -22,6 +24,17 @@ interface lenisEvent {
 		height: number
 	}
 }
+
+interface Colormap {
+	[key: string]: Color3;
+}
+
+const colormap: Colormap = {
+	25: hexToColor3("#ffb5b5"),  // Lighter blue
+	50: hexToColor3("#ffedbe"),    // Purple
+	75: hexToColor3("#e5eae4"),  // Lighter purple
+};
+
 
 function normalizeValue(currentNumber: number, maxNumber: number) {
 	currentNumber = Math.max(1, currentNumber);
@@ -63,22 +76,20 @@ function getAnimationKeyframeLength(animemodel: AnimationGroup | undefined) {
 	return keys.length * 2;
 }
 
-function playAnimationFromTo(currentValue: number, from) {
-	//const animemodel = modelRef.current!.getScene().getAnimationGroupByName("moveBack");
-	const frame = currentValue;
-	//animemodel!.start(false, 1, currentValue, currentValue, false);
 
-}
 interface Sc_anime_sync_scroll_props {
 	model: string;
 	animationName: string;
 
 }
-export default function Law_B_ScrollSync({ model, animationName }: Sc_anime_sync_scroll_props) {
-	const scene = useScene();
 
+const state$ = observable(true);
+export default function Law_B_ScrollSync({ model, animationName }: Sc_anime_sync_scroll_props) {
+	const [scrollPosition, setScrollPosition] = useState(0);
+	const scene = useScene();
 	const modelRef = useRef<Nullable<AbstractMesh>>(null);
 	const transformRef = useRef(null)
+	const [ishalf, SetHalf] = useState(true);
 	let baseUrl = '/glb/';
 
 	function onModelLoaded(model: ILoadedModel) {
@@ -95,7 +106,9 @@ export default function Law_B_ScrollSync({ model, animationName }: Sc_anime_sync
 		const animation = modelRef.current?.getScene().getAnimationGroupByName(animationName);
 		const frameLength = getAnimationKeyframeLength(animation!);
 		const currentFrame = denormalizeValue(currentNomalize, frameLength);
-		console.log(frameLength);
+
+
+
 
 		if (animation === null || animation === undefined) {
 			console.error("AnimationGroup is undefined or null.");
@@ -140,17 +153,6 @@ export default function Law_B_ScrollSync({ model, animationName }: Sc_anime_sync
 			var hemisphericLight = new HemisphericLight("hemiLight", new Vector3(0, 1, 0), scene);
 			hemisphericLight.diffuse = new Color3(0.7, 0.7, 1); // Blue tint for ambient light
 
-			var buildingMaterial = new PBRMaterial("buildingMaterial", scene);
-
-			// Set PBR material properties
-			buildingMaterial.albedoColor = new Color3(1, 1, 1); // Base color
-			buildingMaterial.metallic = 0.0; // Metallicness (0 to 1)
-			buildingMaterial.roughness = 0.5; // Roughness (0 to 1)
-			if (modelRef.current != null) {
-				modelRef.current.material = buildingMaterial;
-			}
-
-			//add spot light
 			var Spotlight = new SpotLight(
 				"spot",
 				new Vector3(0, 2.8, 0),
@@ -162,14 +164,57 @@ export default function Law_B_ScrollSync({ model, animationName }: Sc_anime_sync
 			Spotlight.intensity = 20;
 
 			scene.fogMode = BS.FOGMODE_EXP;
-			scene.fogColor = new Color3(0.5, 0.8, 1.0); // Aqua color
-			scene.fogDensity = 0.01;
+			scene.fogColor = new Color3(0.4, 0.8, 1.0); // Aqua color
+			scene.fogDensity = 0.08;
 		}
 
 
 
 		scrollEvent();
 	}, [modelRef.current])
+
+
+	useEffect(() => {
+		//based on scroll position change fog color
+		const handleScroll = (event) => {
+
+			const normalizedScroll = Math.min(
+				100,
+				Math.max(0, (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100)
+			);
+			setScrollPosition(normalizedScroll);
+
+
+			if (normalizedScroll >= 20) {
+
+				const closestKey = Object.keys(colormap).reduce((prev, curr) => {
+					const prevDiff = Math.abs(parseInt(prev, 10) - normalizedScroll);
+					const currDiff = Math.abs(parseInt(curr, 10) - normalizedScroll);
+					return currDiff < prevDiff ? curr : prev;
+				});
+
+
+				if (scene != null) {
+					scene.fogColor = colormap[closestKey];
+				}
+
+
+
+			} else {
+				scene.fogColor = new Color3(0.4, 0.8, 1.0);
+			}
+
+		};
+
+		window.addEventListener('wheel', handleScroll);
+
+		return () => {
+			window.removeEventListener('wheel', handleScroll);
+		};
+	}, []);
+
+
+
 
 	return (<>
 		<Suspense fallback={

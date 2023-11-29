@@ -1,7 +1,7 @@
 import { CardFooter } from "@/components/ui/card";
 import Image from 'next/image'
 
-export default function C_mini() {
+export default function C_product_2() {
 	return (
 		<div className="mx-auto w-full max-w-md overflow-hidden rounded-lg bg-white shadow-md dark:bg-zinc-900">
 			<div className="flex items-center justify-between px-6 py-4">
