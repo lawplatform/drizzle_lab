@@ -1,6 +1,6 @@
 "use client"
-import { Scene as BS, AbstractMesh, ArcRotateCamera, Color4, Nullable, Vector3, Animation, AnimationGroup, Color3, CubeTexture, Texture, PointLight, MeshBuilder, GizmoManager, PositionGizmo, DirectionalLight, HemisphericLight, StandardMaterial, ColorCorrectionPostProcess, SpotLight, FresnelParameters, PBRMaterial, Tools, } from '@babylonjs/core'
-import { Engine, Scene, Camera, useScene, useCanvas, Model, ILoadedModel, } from 'react-babylonjs'
+import { Scene as BS, AbstractMesh, ArcRotateCamera, Color4, Nullable, Vector3, Animation, AnimationGroup, Color3, CubeTexture, PointLight, MeshBuilder, GizmoManager, PositionGizmo, DirectionalLight, HemisphericLight, StandardMaterial, ColorCorrectionPostProcess, SpotLight, FresnelParameters, PBRMaterial, Tools, SceneLoader, TextureAssetTask, Texture, } from '@babylonjs/core'
+import { Engine, Scene, Camera, useScene, useCanvas, Model, ILoadedModel, Task, TaskType, useAssetManager, texture } from 'react-babylonjs'
 import "@babylonjs/loaders/glTF";
 import Scroll_css from "@/src/scroll/scroll_css";
 import { Suspense, useCallback, useEffect, useRef, useState } from "react";
@@ -28,6 +28,21 @@ interface lenisEvent {
 interface Colormap {
 	[key: string]: Color3;
 }
+
+const textureAssets: Task[] = [
+	{
+		taskType: TaskType.Texture,
+		url: '/texture/city_texture.png',
+		name: 'city',
+
+	},
+	{
+		taskType: TaskType.Texture,
+		url: '/texture/office.png',
+		name: 'office',
+
+	}
+]
 
 const colormap: Colormap = {
 	25: hexToColor3("#ffb5b5"),  // Lighter blue
@@ -91,6 +106,10 @@ export default function Law_B_ScrollSync({ model, animationName }: Sc_anime_sync
 	const transformRef = useRef(null)
 	const [ishalf, SetHalf] = useState(true);
 	let baseUrl = '/glb/';
+
+	const assetManagerResult = useAssetManager(textureAssets, {
+		useDefaultLoadingScreen: true,
+	})
 
 	function onModelLoaded(model: ILoadedModel) {
 		modelRef.current = model.rootMesh!
@@ -165,7 +184,13 @@ export default function Law_B_ScrollSync({ model, animationName }: Sc_anime_sync
 
 			scene.fogMode = BS.FOGMODE_EXP;
 			scene.fogColor = new Color3(0.4, 0.8, 1.0); // Aqua color
-			scene.fogDensity = 0.08;
+			scene.fogDensity = 0.02;
+
+
+
+
+
+
 		}
 
 
@@ -201,7 +226,9 @@ export default function Law_B_ScrollSync({ model, animationName }: Sc_anime_sync
 
 
 			} else {
-				scene.fogColor = new Color3(0.4, 0.8, 1.0);
+				if (scene != null) {
+					scene.fogColor = new Color3(0.4, 0.8, 1.0);
+				}
 			}
 
 		};
@@ -217,8 +244,7 @@ export default function Law_B_ScrollSync({ model, animationName }: Sc_anime_sync
 
 
 	return (<>
-		<Suspense fallback={
-			<box name="fallback" position={new Vector3(0, 0, 0)} />}>
+		<Suspense fallback={<box name="fallback" position={new Vector3(0, 0, 0)} />}>
 			<Model
 				ref={modelRef}
 				name="monkey"
@@ -229,9 +255,10 @@ export default function Law_B_ScrollSync({ model, animationName }: Sc_anime_sync
 				position={new Vector3(-2, 2, -2)}
 				onModelLoaded={onModelLoaded}
 				scaling={new Vector3(1, 1, 1)}
-			/>
+			>
 
-		</Suspense>
+			</Model>
+		</Suspense >
 
 	</>
 	)

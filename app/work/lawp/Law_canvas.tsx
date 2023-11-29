@@ -21,7 +21,7 @@ export default function Law_canvas() {
 					<arcRotateCamera
 						radius={4}
 						name="camera1"
-						alpha={Math.PI / 10}  // Slightly rotate around the Y-axis
+						alpha={Math.PI / 10} // Slightly rotate around the Y-axis
 						beta={20}   // Slightly rotate above the XZ plane
 						target={Vector3.Zero()}
 						lowerRadiusLimit={3}
@@ -40,8 +40,9 @@ export default function Law_canvas() {
 						direction={new Vector3(0, 0, 0)}
 						diffuse={new Color3(0, 0, 0)}
 					/>
-
-					<Law_B_ScrollSync model={"city_test.glb"} animationName={"main"} />
+					<Suspense>
+						<Law_B_ScrollSync model={"city_test.glb"} animationName={"main"} />
+					</Suspense>
 
 				</Scene>
 			</Engine>
