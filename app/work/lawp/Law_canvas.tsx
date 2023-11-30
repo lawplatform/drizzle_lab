@@ -31,9 +31,6 @@ export default function Law_canvas() {
 						lowerAlphaLimit={Math.PI / 4.5}  // Adjust the lower limit for XZ rotation
 						upperAlphaLimit={Math.PI / 4.5}  // Adjust the upper limit for XZ rotatio
 					/>
-
-
-
 					<hemisphericLight
 						name="light1"
 						intensity={20}

@@ -213,8 +213,8 @@ export default function F_register() {
 				</form>
 			</Form>
 			<footer className="bg-grey-lighter w-full py-8">
-				<div className="mx-auto max-w-md px-8 text-center">
-					<div className="mx-auto flex items-center justify-center">
+				<div className="mx-auto  w-full justify-center px-8 text-center">
+					<div className="mx-auto flex w-full bg-red-100">
 						<Logo color={"black"} />
 					</div>
 				</div>

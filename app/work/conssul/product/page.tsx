@@ -6,7 +6,7 @@ export default function Home() {
 			<Layout_max_width_wrapper>
 
 			</Layout_max_width_wrapper>
-		</Reser>
+		</div>
 
 
 	)

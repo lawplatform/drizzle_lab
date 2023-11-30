@@ -67,7 +67,7 @@ export function F_signin_credential({ className, ...props }: UserAuthFormProps) 
 				<form className="bg-grey-lightest w-full pt-4" onSubmit={form.handleSubmit(onSubmit)}>
 					<div className="container mx-auto py-8">
 						<div className="mx-auto  rounded bg-white shadow ">
-							<div className="border-grey-lighter border-b px-8 py-4 text-xl text-black">회원가입</div>
+							<div className="border-grey-lighter border-b px-8 py-4 text-xl text-black">로그인</div>
 							<div className="px-8 py-4">
 
 								<FormField

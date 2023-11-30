@@ -12,28 +12,28 @@ export default function C_pick() {
 					/>
 
 					<C_reveal_text
-						img={"/temp/A.png"}
+						img={"/gallery/1.jpg"}
 						title={"이런상담"}
 						description={"저런 상담"}
 					/>
 				</div>
 				<div className=" col-span-3 max-h-[14rem] overflow-hidden rounded-xl">
 					<C_reveal_text
-						img={"/temp/A.png"}
+						img={"/gallery/2.jpg"}
 						title={"이런상담"}
 						description={"저런 상담"}
 					/>
 				</div>
 				<div className=" col-span-2 max-h-[10rem] overflow-hidden rounded-xl">
 					<C_reveal_text
-						img={"/temp/A.png"}
+						img={"/gallery/3.jpg"}
 						title={"이런상담"}
 						description={"저런 상담"}
 					/>
 				</div>
 				<div className=" col-span-2 max-h-[10rem] overflow-hidden rounded-xl">
 					<C_reveal_text
-						img={"/temp/A.png"}
+						img={"/gallery/4.jpg"}
 						title={"이런상담"}
 						description={"저런 상담"}
 					/>

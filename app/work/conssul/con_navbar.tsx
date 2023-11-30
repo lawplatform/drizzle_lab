@@ -5,7 +5,7 @@ import { UserCircle } from "lucide-react";
 export default function Con_navbar() {
 	return (
 		<nav className="bg-gray-800">
-			<div className="mx-auto w-full max-w-screen-lg px-2.5 md:px-20">
+			<div className="mx-auto w-full max-w-screen-xl px-2.5 md:px-20">
 				<div className="relative flex h-16 items-center justify-between">
 					<div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
 						<button type="button" className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
@@ -21,15 +21,18 @@ export default function Con_navbar() {
 						</button>
 					</div>
 					<div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-						<div className="flex flex-shrink-0 items-center">
-							<Image alt="company logo" src={"/company/logo/logo_w.png"} width={100} height={50} />
-						</div>
+						<Link href="./">
+							<div className="flex flex-shrink-0 items-center">
+
+								<Image alt="company logo" src={"/company/logo/logo_w.png"} width={100} height={50} />
+							</div>
+						</Link>
 						<div className="hidden sm:ml-6 sm:block">
 							<div className="flex space-x-4">
 								<a href="#" className="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white" aria-current="page">정보 </a>
 								<a href="#" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">상담</a>
 								<a href="#" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">검색</a>
-								<a href="#" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">일정</a>
+								<Link href="/work/conssul/dashboard" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">일정</Link>
 							</div>
 						</div>
 					</div>
@@ -45,10 +48,11 @@ export default function Con_navbar() {
 						<div className="relative ml-3">
 							<div>
 								<button type="button" className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-									<span className="absolute -inset-1.5"></span>
-									<span className="sr-only">Open user menu</span>
-									<UserCircle color={"white"} />
-
+									<Link href="/signIn">
+										<span className="absolute -inset-1.5"></span>
+										<span className="sr-only">Open user menu</span>
+										<UserCircle color={"white"} />
+									</Link>
 
 								</button>
 							</div>
@@ -67,7 +71,7 @@ export default function Con_navbar() {
 					<a href="#" className="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white" aria-current="page">정보</a>
 					<a href="#" className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">상담</a>
 					<a href="#" className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">검색</a>
-					<a href="#" className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">일정</a>
+					<Link href="./dashboard" className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">일정</Link>
 				</div>
 			</div>
 		</nav>

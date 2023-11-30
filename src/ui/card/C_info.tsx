@@ -11,7 +11,7 @@ export default function C_info({ title, number, des, children, color }: C_infoPr
 		background: color
 	}
 	return (
-		<div className="mx-2 my-2 flex flex-row  rounded-xl border p-4 shadow-md">
+		<div className="mx-2 my-2 flex w-full flex-row rounded-xl border p-4 shadow-md">
 			<div style={style} className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl">
 				{children}
 			</div>
